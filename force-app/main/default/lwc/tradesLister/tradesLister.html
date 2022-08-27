@@ -1,0 +1,22 @@
+<template>
+    <lightning-button
+      variant="neutral"
+      label="New Trade"
+      title="Open popup"
+      onclick={showModalBox}
+      class="Butt"
+    >
+    </lightning-button>
+    <c-currency-Calculator></c-currency-Calculator>
+  
+    <div style="height: 300px;">
+      <lightning-datatable
+        key-field="id"
+        data={data}
+        columns={columns}
+        hide-checkbox-column
+      >
+      </lightning-datatable>
+    </div>
+  </template>
+  

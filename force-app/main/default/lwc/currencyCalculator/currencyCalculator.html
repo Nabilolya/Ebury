@@ -1,0 +1,123 @@
+<template>
+    <template if:true={isShowModal}>
+      <section
+        role="dialog"
+        tabindex="-1"
+        aria-labelledby="modal-heading-01"
+        aria-modal="true"
+        aria-describedby="modal-content-id-1"
+        class="slds-modal slds-fade-in-open"
+      >
+        <div class="slds-modal__container">
+     
+          <header class="slds-modal__header">
+            <div class="header">New Trade</div>
+          </header>
+  
+          <div
+            class="slds-modal__content slds-p-around_medium"
+            id="modal-content-id-1"
+          >
+            <div class="c-container">
+              <lightning-layout>
+                <table>
+                  <tr>
+                    <td>
+                      <lightning-combobox
+                        name="Sell"
+                        label="Sell Currency"
+                        value={value2}
+                        placeholder="Select Currency"
+                        options={options}
+                        onchange={handleChangeSell}
+                      >
+                      </lightning-combobox>
+                    </td>
+                    <td style="padding-top:25px;">
+                      <div class="slds-p-around_medium slds-text-align_center">
+                        <lightning-button-icon
+                          icon-name="utility:chevronright"
+                          alternative-text="Settings"
+                          title="Settings"
+                        ></lightning-button-icon>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="slds-p-around_medium slds-text-align_center">
+                        {RateValue}
+                      </div>
+                    </td>
+                    <td style="padding-top:25px;">
+                      <lightning-button-icon
+                        icon-name="utility:chevronright"
+                        alternative-text="Settings"
+                        title="Settings"
+                      ></lightning-button-icon>
+                    </td>
+                    <td style="padding-left:20px;">
+                      <lightning-combobox
+                        name="Buy"
+                        label="Buy Currency"
+                        value={value1}
+                        placeholder="Select Currency"
+                        options={options}
+                        onchange={handleChangeBuy}
+                      ></lightning-combobox>
+                    </td>
+                  </tr>
+  
+                  <tr style="text-align:center;">
+                    <td colspan="4">
+                      <lightning-input
+                        class="slds-size--1-of-1"
+                        type="number"
+                        min="0"
+                        label="Sell Amount"
+                        onchange={handleChangeInput}
+                      ></lightning-input>
+                    </td>
+                    <td style="padding-left: 3.5%;">
+                      <lightning-input
+                        type="text"
+                        label="Buy Amount"
+                        onchange={handleChangeInput}
+                        value={result}
+                        disabled
+                      ></lightning-input>
+                    </td>
+                  </tr>
+                </table>
+              </lightning-layout>
+  
+  
+            </div>
+          </div>
+
+          <footer class="slds-modal__footer">
+            <table>
+              <tr>
+                <td style="with:50%;text-align:center;">
+                  <lightning-button
+                    label="Create"
+                    title="Non-primary action"
+                    onclick={handleClickCreate}
+                    class="slds-m-left_x-small"
+                  ></lightning-button>
+                </td>
+                <td style="with:50%;text-align:center;">
+                  <button
+                    class="slds-button slds-button_neutral"
+                    onclick={hideModalBox}
+                  >
+                    Cancel
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </footer>
+        </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+  </template>
+  

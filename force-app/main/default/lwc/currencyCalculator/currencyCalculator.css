@@ -1,0 +1,23 @@
+h1{
+  
+}
+lightning-combobox{
+    width:auto;
+}
+lightning-input {
+    width:80px;
+}
+
+lightning-layout{
+
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+hr { display: block; margin-before: 0.5em; margin-after: 0.5em; margin-start: auto; margin-end: auto; overflow: hidden; border-style: inset; border-width: 1px;}
+
+.header{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
