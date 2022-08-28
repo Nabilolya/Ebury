@@ -25,6 +25,7 @@ export default class CurrencyCalculator extends LightningElement {
         ];
     }
 
+ // will be accessible from the other componenet so it must be public
   @api
     showModalBox() {  
         this.isShowModal = true;
@@ -37,30 +38,33 @@ export default class CurrencyCalculator extends LightningElement {
     handleChangeBuy(event) {
         this.BuyDropDownSelected = true;
         this.value1 = event.detail.value;
-        if (this.BuyDropDownSelected && this.SellDropDownSelected &&  this.WanetdValue!=null ){
-            console.log('both selected from buy');
+        // Check Sell and Buy combobox are chosed and also the WantedValue for money
+        if (this.BuyDropDownSelected && this.SellDropDownSelected && this.WanetdValue != null) {
+            this.CallData();
         }
     }
 
     handleChangeSell(event) {
         this.SellDropDownSelected = true;
         this.value2 = event.detail.value;
+        // Check Sell and Buy combobox are chosed and also the WantedValue for amount wanted
         if (this.BuyDropDownSelected && this.SellDropDownSelected && this.WanetdValue!=null) {
-            console.log('both selected from sell');
+            this.CallData();
         }
     }
 
     handleClickCreate(event) {
-        console.log('rah khdam 1');
         this.clickedButtonLabelCreate = event.target.label;
         this.FinalAmount = this.RateValue * this.WanetdValue;
+        // Format the now date, i can refactor it to an extern method
         let rightNow = new Date();
         rightNow.setMinutes(
             new Date().getMinutes() - new Date().getTimezoneOffset()
         );
         let yyyyMmDd = rightNow.toISOString().slice(0, 10);
         let yyyyMmDd1 = rightNow.toISOString().slice(11, 19);
-        this.date=yyyyMmDd+' '+yyyyMmDd1;
+        this.date = yyyyMmDd + ' ' + yyyyMmDd1;
+        // The object to be send to backedn ( Apex method )
         this.exchange=
         {
             SellCurrency:this.value2,
@@ -70,16 +74,12 @@ export default class CurrencyCalculator extends LightningElement {
             Rate:this.RateValue,
             DateBooked:this.date
         };
-
-        console.log('rah khdam 2');
-        console.log('hahowa objet ' + JSON.stringify(this.exchange));
-        console.log('hahowa objet '+ this.exchange);
+        
+       // Create a new trade by calling the apex method
         createTrade({exchange: JSON.stringify(this.exchange)})
-        .then(result => { console.log('rah khdam 3');
-            console.log('Data:' + JSON.stringify(result));
-        }) .catch(error => {
-            console.log(error);
-            console.log('rah khdam 4');
+            .then(result => { 
+                console.log('Submitted');
+         }) .catch(error => {
             this.error = error;
         }
        );
@@ -91,19 +91,16 @@ export default class CurrencyCalculator extends LightningElement {
 
     handleChangeInput(event) {
         this.WanetdValue = event.target.value;
+        // Check Sell and Buy combobox are chosed and also the WantedValue for money
         if (this.BuyDropDownSelected && this.SellDropDownSelected &&  this.WanetdValue!=null ){
-            console.log('both selected from Input');
             this.CallData();
         }
     }
 
+    // Call method responsible for fixerIO data
     CallData() {
         ApiCall({ to: 'eur' , fromm: 'usd', amount: '3' })
-            .then(data => {
-             
-            })
             .then(data => { 
-                console.log('this is my data ' + data.result);
                 this.result = data.result;
                 this.RateValue = data.info.rate;
         }) .catch(error => {
@@ -111,11 +108,5 @@ export default class CurrencyCalculator extends LightningElement {
         }
        );
 	}
-
-
-
-    
-
-
  
 }

@@ -14,26 +14,27 @@ export default class TradesLister extends LightningElement {
 
     data = [];
     columns = columns;
-
+    @track error;
+  
+    // Show modal
     showModalBox() {
         const modal = this.template.querySelector('c-currency-Calculator');
          modal.showModalBox();
-        console.log('pop up is showed 2');
+
      }
 
+    // Onload method to get the data from salesforce
     connectedCallback() {
-        console.log('Hello moto ');
         this.CallTrades();
      }
     
+    // Method responsible for getting data
     CallTrades() {
-         ReturnTrades()
-        .then(data => {    
-        var allTBGContacts = JSON.stringify(data);
-        console.log('this is allTBAccts  ' + allTBGContacts);
-        console.log('this is normal data ' + data);
-        this.data = data;
-                      }
-             )
+        ReturnTrades()
+              .then(data => {
+                this.data = data;
+            }).catch(error => {
+                this.error = error;
+            });
     }
 }

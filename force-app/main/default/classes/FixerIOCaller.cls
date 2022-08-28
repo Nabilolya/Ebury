@@ -20,7 +20,7 @@ public with sharing class FixerIOCaller {
        return obj;
         }
         catch(System.CalloutException e){
-            //Exception handling goes here..
+        //Exception handling goes here..
             system.debug(e);
         }
         return null;
