@@ -1,0 +1,27 @@
+Please follow next command to 
+authentificate
+create a Scratch Org 
+Push the code to the newly created Scratch org
+
+After that follow the documentation file in the git repo to configure the project for
+
+Named credentials
+and chatters config
+
+--------------------------------------------------------------------------------
+SFDX commands to run : 
+Create a DevHub User by running the following command in either above repo: 
+
+sfdx force:auth:web:login -r 'sandbox link' --setdefaultdevhubusername --setalias EburyProject
+
+Scratch Org Set Up/ Create Empty Scratch Org
+
+sfdx force:org:create -v EburyProject-a EburySO -f config/scratchorg.json -w 10 -d 7
+
+
+Clone SF project from git using this link:
+ 
+https://github.com/Nabilolya/Ebury.git
+
+Push code to your newly created scratch org 
+sfdx force:source:push -u EburySO -f

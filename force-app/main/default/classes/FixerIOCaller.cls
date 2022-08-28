@@ -7,7 +7,7 @@ public with sharing class FixerIOCaller {
         HttpRequest req = new HttpRequest();
         req.setMethod('GET');
         req.setEndpoint(URL);
-        // Fixer IO API key 
+        // Fixer IO API key handeled by FixerIO
         req.setHeader('APIKEY', '3w8WQ5kHdt1iGOs7FBeTf5CiQVDcXbB4');
         Http http = new Http();
         // Make the call with exception handling
@@ -16,7 +16,6 @@ public with sharing class FixerIOCaller {
        //Executing web service call
        JsonWrapper  obj= new JsonWrapper();
        obj = JsonWrapper.parse(res.getBody());
-       System.debug('This is before '+obj);
        return obj;
         }
         catch(System.CalloutException e){

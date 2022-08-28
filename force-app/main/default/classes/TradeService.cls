@@ -26,6 +26,7 @@ public with sharing class TradeService {
             tr.Id__c=IdFormatter(Lasttrade.Id__c);
      
         } else{
+            // In case no record exists in salesforce for Trades
             tr.Id__c='TR0000000';
         }
 
