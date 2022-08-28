@@ -1,5 +1,5 @@
 import { LightningElement, track,wire,api  } from 'lwc';
-import createAccountContact from '@salesforce/apex/AccountService.createAccountContact';
+import createTrade from '@salesforce/apex/TradeService.createTrade';
 import ApiCall from "@salesforce/apex/FixerIOCaller.ApiCall";
 
 export default class CurrencyCalculator extends LightningElement {
@@ -15,6 +15,7 @@ export default class CurrencyCalculator extends LightningElement {
     @track exchange;
     @track result;
     @api isShowModal = false;
+    @track error;
 
     get options() {
         return [
@@ -73,7 +74,7 @@ export default class CurrencyCalculator extends LightningElement {
         console.log('rah khdam 2');
         console.log('hahowa objet ' + JSON.stringify(this.exchange));
         console.log('hahowa objet '+ this.exchange);
-        createAccountContact({exchange: JSON.stringify(this.exchange)})
+        createTrade({exchange: JSON.stringify(this.exchange)})
         .then(result => { console.log('rah khdam 3');
             console.log('Data:' + JSON.stringify(result));
         }) .catch(error => {
@@ -99,15 +100,16 @@ export default class CurrencyCalculator extends LightningElement {
     CallData() {
         ApiCall({ to: 'eur' , fromm: 'usd', amount: '3' })
             .then(data => {
-               var allTBGContacts = JSON.stringify(data);
              
+            })
+            .then(data => { 
                 console.log('this is my data ' + data.result);
                 this.result = data.result;
                 this.RateValue = data.info.rate;
-                console.log('this is my res ' + this.result);
-                console.log('this is my rate ' + data.info.rate);
-                console.log(' this is my info ' + allTBGContacts);
-            })
+        }) .catch(error => {
+            this.error = error;
+        }
+       );
 	}
 
 

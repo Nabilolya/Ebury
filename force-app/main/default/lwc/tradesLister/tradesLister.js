@@ -1,5 +1,5 @@
 import { LightningElement, track } from 'lwc';
-import ReturnTrades from '@salesforce/apex/AccountService.ReturnTrades';
+import ReturnTrades from '@salesforce/apex/TradeService.ReturnTrades';
 
 const columns = [
     { label: 'Sell Currency', fieldName: 'SellCurrency__c' },

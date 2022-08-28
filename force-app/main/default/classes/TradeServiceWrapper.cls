@@ -1,4 +1,4 @@
-public with sharing class AccountWrapper {
+public with sharing class TradeServiceWrapper {
 
     @auraenabled
     public String SellCurrency{get;set;}
@@ -13,6 +13,6 @@ public with sharing class AccountWrapper {
     @auraenabled
     public String DateBooked{get;set;}
    
-    public AccountWrapper() {
+    public TradeServiceWrapper() {
     }
 }
